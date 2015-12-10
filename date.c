@@ -1,7 +1,8 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<time.h>
+/* **************************
+ * The date command of shell
+ * *************************/
+
+#include "main.h"
 
 int dates(const char *p)
 {
@@ -10,7 +11,7 @@ int dates(const char *p)
 	char buf[32];
 	char *week[7]={"日 ","一 ","二 ","三 ","四 ","五 ","六 "};
 
-	if(strlen(p)> 5)// \n is inside in commond,so it is 5,only support date format
+	if(strlen(p)> 5)// \n is inside in command,so it is 5,only support date format
 	{
 		printf("can't support this format \n");
 		return 1;
