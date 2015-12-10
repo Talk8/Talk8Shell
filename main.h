@@ -1,21 +1,30 @@
+/* **************************
+ * The head file of shell
+ * *************************/
+
+
+#ifndef SHELL_HEAD_FILE
+#define SHELL_HEAD_FILE
+
 #include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<string.h>
+#include<time.h>
+
 
 #define BUF_SIZE 64
+#define PATH_SIZE 256
 
-typedef struct _input_type
+typedef struct _command_type
 {
 	char * str; // the value of input
 	int size;   // the length of value
-}input_type;
+}command_type;
 
-input_type input[] =
-{
-	{"exit",4},
-	{"cd",2},
-	{"ls",2},
-	{"date",4},
-};
-
-void cds(const char * p);
+int cds(const char * p);
 void lss(const char * p);
 int dates(const char * p);
+int pwds();
+
+#endif
