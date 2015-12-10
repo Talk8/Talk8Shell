@@ -4,6 +4,15 @@
 
 #include "main.h"
 
+command_type cmd[] =
+{
+	{"exit",4},
+	{"cd",2},
+	{"ls",2},
+	{"date",4},
+	{"pwd",3},
+};
+
 int main(int argc, char *argv[])
 {
 	char buf[BUF_SIZE];
@@ -17,45 +26,43 @@ int main(int argc, char *argv[])
 		if(NULL == fgets(buf,BUF_SIZE,stdin))
 			return 0;
 
-		index = sizeof(input)/sizeof(input_type);
+		index = sizeof(cmd)/sizeof(command_type);
 		while(index-- > 0)
 		{
-			res = strncmp(buf,input[index].str,input[index].size);
+			res = strncmp(buf,cmd[index].str,cmd[index].size);
 			if(res == 0)
 			{
 				switch(index)
 				{
-				case 0: // exec exit commond
+				case 0: // exec exit command
 					flag = 0;
 					break;
-				case 1: // exec cd commond
+				case 1: // exec cd command
 					cds(buf);
 					break;
-				case 2: // exec ls commond
+				case 2: // exec ls command
 					lss(buf);
 					break;
-				case 3: // exec date commond
+				case 3: // exec date command
 					dates(buf);
 					break;
+				case 4: // exec pwd command
+					pwds();
+					break;
 				default:
-					printf("can 's \n");
+					printf("can 's running this command \n");
 					break;
 				}
 
-				index = -1; // if find the commond, stop finding
+				index = -1; // if find the command, stop finding
 			}
 		}
 
 		if(index == -1)
-			printf("can't find commond: %s ",buf);
+			printf("can't find command: %s ",buf);
 	}
 
 	return 0;
-}
-
-void cds(const char * p)
-{
-	printf("cd running \n");
 }
 
 void lss(const char * p)
