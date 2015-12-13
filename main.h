@@ -11,6 +11,8 @@
 #include<unistd.h>
 #include<string.h>
 #include<time.h>
+#include<dirent.h>
+#include<sys/stat.h>
 
 
 #define BUF_SIZE 64
@@ -23,7 +25,7 @@ typedef struct _command_type
 }command_type;
 
 int cds(const char * p);
-void lss(const char * p);
+int lss(const char * p);
 int dates(const char * p);
 int pwds();
 
