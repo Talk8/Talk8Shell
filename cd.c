@@ -10,7 +10,6 @@ int cds(const char *p)
 	char *start;
 	char *end;
 	int res;
-	int n= 0;
 
 	memset(path,'\0',PATH_SIZE); // must init ,ohtrway there is a wrong result with @
 	
