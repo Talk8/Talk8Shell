@@ -27,6 +27,7 @@ typedef struct _command_type
 int cds(const char * p);
 int lss(const char * p);
 int dates(const char * p);
+int cats(const char * p);
 int pwds();
 
 #endif
