@@ -11,6 +11,7 @@ command_type cmd[] =
 	{"ls",2},
 	{"date",4},
 	{"pwd",3},
+	{"cat",3},
 };
 
 int main(int argc, char *argv[])
@@ -48,6 +49,9 @@ int main(int argc, char *argv[])
 					break;
 				case 4: // exec pwd command
 					pwds();
+					break;
+				case 5: // exec cat command
+					cats();
 					break;
 				default:
 					printf("can 's running this command \n");
