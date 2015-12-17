@@ -12,7 +12,11 @@
 #include<string.h>
 #include<time.h>
 #include<dirent.h>
+#include<pwd.h>
+#include<grp.h>
 #include<sys/stat.h>
+#include<sys/types.h>
+
 
 
 #define BUF_SIZE 64
