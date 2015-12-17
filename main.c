@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 					pwds();
 					break;
 				case 5: // exec cat command
-					cats();
+					cats(buf);
 					break;
 				default:
 					printf("can 's running this command \n");
