@@ -3,14 +3,112 @@
  * *************************/
 
 /* *************************
- * support 2 kinds of ls command
+ * support 3 kinds of ls command
  * 1.ls
  * 2.ls -a,
- * 3.othre params, add in later
+ * 3.ls -l
+ * 4.othre params, add in later
  * **************************/
 
 #include "main.h"
 
+void show_attr(char *name)
+{
+	struct stat buf;
+	struct passwd *pwd;
+	struct group *grp;
+	char type ;
+	char permission[9];
+	int i = 0 ;
+
+	memset(permission,'-',9*sizeof(char));
+
+	if(!stat(name,&buf))
+	{
+		// get the type of file
+		if(S_ISLNK(buf.st_mode))
+			type = 'l';
+		else if(S_ISREG(buf.st_mode))
+			type = '-';
+		else if(S_ISDIR(buf.st_mode))
+			type = 'd';
+		else if(S_ISCHR(buf.st_mode))
+			type = 'c';
+		else if(S_ISBLK(buf.st_mode))
+			type = 'b';
+		else if(S_ISFIFO(buf.st_mode))
+			type = 'p';
+		else if(S_ISSOCK(buf.st_mode))
+			type = 's';
+
+		// get the permission of file
+		if(buf.st_mode & S_IRUSR)
+			permission[0] = 'r';
+		if(buf.st_mode & S_IWUSR)
+			permission[1] = 'w';
+		if(buf.st_mode & S_IXUSR)
+			permission[2] = 'x';
+		if(buf.st_mode & S_IRGRP)
+			permission[3] = 'r';
+		if(buf.st_mode & S_IWGRP)
+			permission[4] = 'w';
+		if(buf.st_mode & S_IXGRP)
+			permission[5] = 'x';
+		if(buf.st_mode & S_IROTH)
+			permission[6] = 'r';
+		if(buf.st_mode & S_IWOTH)
+			permission[7] = 'w';
+		if(buf.st_mode & S_IXOTH)
+			permission[8] = 'x';
+
+		// get the user name and group name
+		pwd = getpwuid(buf.st_uid);
+		grp = getgrgid(buf.st_gid);
+
+		if(NULL == pwd)
+		{
+			printf("pw is null \n");
+			exit(1);
+		}
+		if(NULL == grp)
+		{
+			printf("grp is null \n");
+			exit(1);
+		}
+		// show file type
+		printf("%c",type);
+
+		// show permission of usr, grout and other
+		while(i<9)
+		{
+			printf("%c",permission[i]);
+			i++;
+		}
+
+		// show the count of link
+		printf("%2d ",buf.st_nlink);
+
+		// show the user name and group name
+		//printf("%s %s",pwd->pw_name,grp->gr_name);
+		//printf(" %s, %s",(pw->pw_name),(grp->gr_name));
+		printf("%-4s",pwd->pw_name);
+		printf("%-4s",grp->gr_name);
+
+		// show the size of file
+		printf( "%6ld ",buf.st_size);
+
+		// show the time of file
+		printf("%.12s",ctime(&buf.st_mtime)+4); //+ 4 skip the weekday ,don't show year info
+
+		// show the name of file
+		printf(" %s\n",name);
+	}
+	else
+	{
+		printf("can't get the state of %s \n",name);
+		exit(1);
+	}
+}
 void sort_name(char name[PATH_SIZE][PATH_SIZE],int len)
 {
 	char str[PATH_SIZE];
@@ -85,6 +183,13 @@ int print(char *str)
 			//printf("%d :%s \n",i,name[i]);
 	}
 
+	// for ls -l command
+	if( !strcmp(str,"l") )
+	{
+		i -= 2; // can't show . and ..in result
+		while(--i>=0)
+			show_attr(name[i]);
+	}
 	return 0;
 }
 
@@ -98,7 +203,7 @@ int lss(const char *p)
 	{
 		"ls",
 		"ls -a",
-		//"ls -l",
+		"ls -l",
 		//"ls -al",
 	};
 
@@ -121,7 +226,7 @@ int lss(const char *p)
 				break;
 			case 1: res = print("a");
 				break;
-			case 2:
+			case 2: res = print("l");
 				break;
 			case 3:
 				break;
