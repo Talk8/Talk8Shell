@@ -89,8 +89,6 @@ void show_attr(char *name)
 		printf("%2d ",buf.st_nlink);
 
 		// show the user name and group name
-		//printf("%s %s",pwd->pw_name,grp->gr_name);
-		//printf(" %s, %s",(pw->pw_name),(grp->gr_name));
 		printf("%-4s",pwd->pw_name);
 		printf("%-4s",grp->gr_name);
 
@@ -98,7 +96,7 @@ void show_attr(char *name)
 		printf( "%6ld ",buf.st_size);
 
 		// show the time of file
-		printf("%.12s",ctime(&buf.st_mtime)+4); //+ 4 skip the weekday ,don't show year info
+		printf("%.12s",ctime(&buf.st_mtime)+4); //+ 4 skip the weekday ,12s don't show year info
 
 		// show the name of file
 		printf(" %s\n",name);
