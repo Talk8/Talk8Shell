@@ -33,5 +33,6 @@ int lss(const char * p);
 int dates(const char * p);
 int cats(const char * p);
 int pwds();
+int lesss(const char *p);
 
 #endif
