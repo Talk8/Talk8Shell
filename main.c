@@ -12,6 +12,7 @@ command_type cmd[] =
 	{"date",4},
 	{"pwd",3},
 	{"cat",3},
+	{"less",4},
 };
 
 int main(int argc, char *argv[])
@@ -53,8 +54,11 @@ int main(int argc, char *argv[])
 				case 5: // exec cat command
 					cats(buf);
 					break;
+				case 6: // exec less command
+					lesss(buf);
+					break;
 				default:
-					printf("can 's running this command \n");
+					printf("can't running this command \n");
 					break;
 				}
 
@@ -63,7 +67,7 @@ int main(int argc, char *argv[])
 		}
 
 		if(index == -1)
-			printf("can't find command: %s ",buf);
+			printf("can't find command: %s",buf);
 	}
 
 	return 0;
