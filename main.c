@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 	int flag = 1;
 	int index = 0;
 
+	
 	while(flag)
 	{
 		printf("|->");
