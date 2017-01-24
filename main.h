@@ -16,6 +16,7 @@
 #include<grp.h>
 #include<sys/stat.h>
 #include<sys/types.h>
+#include<fctl.h>
 
 
 #define BUF_SIZE 64
