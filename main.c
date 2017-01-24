@@ -4,6 +4,7 @@
 
 #include "main.h"
 
+
 command_type cmd[] =
 {
 	{"exit",4},
