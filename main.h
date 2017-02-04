@@ -16,7 +16,8 @@
 #include<grp.h>
 #include<sys/stat.h>
 #include<sys/types.h>
-#include<fctl.h>
+#include<fcntl.h>
+
 
 
 #define BUF_SIZE 64
@@ -34,5 +35,6 @@ int dates(const char * p);
 int cats(const char * p);
 int pwds();
 int lesss(const char *p);
+int cps(const char *p);
 
 #endif
