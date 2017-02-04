@@ -4,7 +4,6 @@
 
 #include "main.h"
 
-
 command_type cmd[] =
 {
 	{"exit",4},
@@ -14,6 +13,7 @@ command_type cmd[] =
 	{"pwd",3},
 	{"cat",3},
 	{"less",4},
+	{"cp",2},
 };
 
 int main(int argc, char *argv[])
@@ -23,7 +23,6 @@ int main(int argc, char *argv[])
 	int flag = 1;
 	int index = 0;
 
-	
 	while(flag)
 	{
 		printf("|->");
@@ -59,6 +58,9 @@ int main(int argc, char *argv[])
 				case 6: // exec less command
 					lesss(buf);
 					break;
+				case 7: // exec cp command
+					cps(buf);
+					break;
 				default:
 					printf("can't running this command \n");
 					break;
@@ -74,4 +76,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-
